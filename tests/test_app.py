@@ -2,7 +2,10 @@ from app import app
 
 def test_health():
     with app.test_client() as client:
-        assert client.get('/health').json == {'status': 'ok'}
+        response = client.get('/health')
+
+        assert response.status_code == 201
+        assert response.json == {'status': 'ok'}
 
 def test_greet_limit():
     with app.test_client() as client:
